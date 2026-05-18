@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leah & Samuel Guerron — Wedding Reception</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --neptune: #2B4A6B;
+    --neptune-light: #3A6190;
+    --dusty-blue: #8AADC4;
+    --dusty-blue-light: #C2D5E3;
+    --sage: #7B956B;
+    --sage-light: #B8CCAE;
+    --gray: #C5CAD0;
+    --gray-light: #EEF0F2;
+    --cream: #FAF8F5;
+    --text-dark: #2A2E35;
+    --text-mid: #5A6270;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--gray-light);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .flyer {
+    width: 100%;
+    max-width: 480px;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(43,74,107,0.18), 0 4px 16px rgba(43,74,107,0.1);
+  }
+
+  /* ── Corner botanical accent (top-left) ── */
+  .flyer::before {
+    content: '';
+    position: absolute;
+    top: -30px; left: -30px;
+    width: 200px; height: 200px;
+    background: radial-gradient(ellipse at top left,
+      rgba(123,149,107,0.18) 0%,
+      rgba(138,173,196,0.10) 50%,
+      transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Corner accent bottom-right ── */
+  .flyer::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 220px; height: 220px;
+    background: radial-gradient(ellipse at bottom right,
+      rgba(43,74,107,0.12) 0%,
+      rgba(138,173,196,0.08) 50%,
+      transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Header band ── */
+  .header {
+    background: var(--neptune);
+    padding: 40px 36px 32px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .header-tag {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dusty-blue-light);
+    margin-bottom: 14px;
+  }
+
+  .couple-names {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 52px;
+    line-height: 1.0;
+    color: var(--cream);
+    letter-spacing: 1px;
+  }
+
+  .couple-names span {
+    display: block;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 300;
+    color: var(--dusty-blue-light);
+    letter-spacing: 6px;
+    margin: 6px 0;
+    font-family: 'Jost', sans-serif;
+  }
+
+  /* thin sage rule */
+  .header-rule {
+    width: 60px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--sage-light), transparent);
+    margin: 18px auto 14px;
+  }
+
+  .header-meta {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 11.5px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--gray);
+    line-height: 1.9;
+  }
+
+  /* ── Dusty blue divider strip ── */
+  .strip {
+    height: 6px;
+    background: linear-gradient(90deg, var(--dusty-blue) 0%, var(--sage) 60%, var(--dusty-blue-light) 100%);
+  }
+
+  /* ── Body ── */
+  .body {
+    padding: 32px 36px 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-family: 'Jost', sans-serif;
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--neptune);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--dusty-blue-light), transparent);
+  }
+
+  /* ── Timeline ── */
+  .timeline {
+    position: relative;
+    padding-left: 0;
+  }
+
+  /* vertical line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 58px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(180deg,
+      transparent,
+      var(--dusty-blue-light) 10%,
+      var(--dusty-blue-light) 90%,
+      transparent);
+  }
+
+  .event {
+    display: grid;
+    grid-template-columns: 58px 24px 1fr;
+    gap: 0 0;
+    align-items: start;
+    margin-bottom: 0;
+    padding: 10px 0;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .event:first-child { padding-top: 4px; }
+  .event:last-child  { padding-bottom: 4px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .event:nth-child(1) { animation-delay: 0.05s; }
+  .event:nth-child(2) { animation-delay: 0.10s; }
+  .event:nth-child(3) { animation-delay: 0.15s; }
+  .event:nth-child(4) { animation-delay: 0.20s; }
+  .event:nth-child(5) { animation-delay: 0.25s; }
+  .event:nth-child(6) { animation-delay: 0.30s; }
+  .event:nth-child(7) { animation-delay: 0.35s; }
+  .event:nth-child(8) { animation-delay: 0.40s; }
+  .event:nth-child(9) { animation-delay: 0.45s; }
+
+  .event-time {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    color: var(--neptune);
+    letter-spacing: 0.5px;
+    text-align: right;
+    padding-top: 2px;
+    padding-right: 0;
+    line-height: 1.3;
+  }
+
+  .event-dot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  .event-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid var(--dusty-blue);
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+
+  .event-dot.accent {
+    background: var(--sage);
+    border-color: var(--sage);
+    width: 11px;
+    height: 11px;
+    margin-top: -1px;
+  }
+
+  .event-dot.neptune {
+    background: var(--neptune);
+    border-color: var(--neptune);
+    width: 11px;
+    height: 11px;
+    margin-top: -1px;
+  }
+
+  .event-content {
+    padding-left: 14px;
+  }
+
+  .event-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--text-dark);
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+  }
+
+  .event-sub {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 10.5px;
+    color: var(--text-mid);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+  }
+
+  .event-sub em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  /* ── Divider between sections ── */
+  .inner-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+  .inner-divider-line {
+    flex: 1;
+    height: 1px;
+    background: var(--gray);
+    opacity: 0.5;
+  }
+
+  .inner-divider-leaf {
+    color: var(--sage);
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  /* ── Footer ── */
+  .footer {
+    background: var(--neptune);
+    padding: 22px 36px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-top-strip {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--sage-light), transparent);
+    margin-bottom: 18px;
+    margin-left: -36px;
+    margin-right: -36px;
+    margin-top: -22px;
+    margin-bottom: 18px;
+  }
+
+  .footer-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--dusty-blue-light);
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+  }
+
+  .footer-small {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 10px;
+    opacity: 0.7;
+  }
+
+  /* ── Bouquet toss highlight ── */
+  .bouquet-block {
+    background: linear-gradient(135deg, rgba(123,149,107,0.10), rgba(138,173,196,0.10));
+    border: 1px solid rgba(123,149,107,0.25);
+    border-radius: 3px;
+    padding: 10px 14px;
+    margin: 6px 0 2px;
+  }
+
+  .bouquet-block .event-title {
+    color: var(--sage);
+  }
+</style>
+</head>
+<body>
+
+<div class="flyer">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-tag">Wedding Reception</div>
+    <div class="couple-names">
+      Leah
+      <span>&amp;</span>
+      Samuel Guerron
+    </div>
+    <div class="header-rule"></div>
+    <div class="header-meta">
+      <br>
+      205 Lacewood Drive · Halifax, NS<br>
+      May 18, 2026
+    </div>
+  </div>
+
+  <!-- COLOR STRIP -->
+  <div class="strip"></div>
+
+  <!-- BODY -->
+  <div class="body">
+
+    <div class="section-label">Schedule of Events</div>
+
+    <div class="timeline">
+
+      <div class="event">
+        <div class="event-time">3:30<br>pm</div>
+        <div class="event-dot-col"><div class="event-dot"></div></div>
+        <div class="event-content">
+          <div class="event-title">Guests Arrive</div>
+          <div class="event-sub">Welcoming and Seating of Guests</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">3:45</div>
+        <div class="event-dot-col"><div class="event-dot neptune"></div></div>
+        <div class="event-content">
+          <div class="event-title">Grand Entrance</div>
+          <div class="event-sub">Wedding party, Samuel & Leah arrive</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">4:00–<br>5:00</div>
+        <div class="event-dot-col"><div class="event-dot"></div></div>
+        <div class="event-content">
+          <div class="event-title">Dinner & Socializing</div>
+          <div class="event-sub">Please enjoy the meal and company</div>
+        </div>
+      </div>
+
+      <div class="inner-divider">
+        <div class="inner-divider-line"></div>
+        <div class="inner-divider-leaf">✦</div>
+        <div class="inner-divider-line"></div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">5:00–<br>5:20</div>
+        <div class="event-dot-col"><div class="event-dot accent"></div></div>
+        <div class="event-content">
+          <div class="event-title">Speeches</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">5:20–<br>6:00</div>
+        <div class="event-dot-col"><div class="event-dot"></div></div>
+        <div class="event-content">
+          <div class="event-title">Cake Cutting & Dessert</div>
+          <div class="event-sub">Sweets & celebration</div>
+        </div>
+      </div>
+
+      <div class="inner-divider">
+        <div class="inner-divider-line"></div>
+        <div class="inner-divider-leaf">✦</div>
+        <div class="inner-divider-line"></div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">6:00–<br>6:10</div>
+        <div class="event-dot-col"><div class="event-dot accent"></div></div>
+        <div class="event-content">
+          <div class="event-title">The Shoe Game</div>
+          <div class="event-sub"><em>Arranged by Daniel &amp; Emmeline</em></div>
+        </div>
+      </div>
+
+      <div class="event" style="padding-bottom:4px;">
+        <div class="event-time">6:10–<br>6:20</div>
+        <div class="event-dot-col"><div class="event-dot accent"></div></div>
+        <div class="event-content">
+          <div class="bouquet-block">
+            <div class="event-title">💐 Bouquet Toss</div>
+            <div class="event-sub">Ladies, get ready!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-time">6:20–<br>7:30</div>
+        <div class="event-dot-col"><div class="event-dot neptune"></div></div>
+        <div class="event-content">
+          <div class="event-title">Dancing & Celebration</div>
+          <div class="event-sub">Hit the dance floor — night ends at 7:30</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="strip" style="height:3px;"></div>
+  <div class="footer">
+    <div class="footer-text">
+      "And they lived happily ever after."
+    </div>
+    <div class="footer-small">Thank you for celebrating with us</div>
+  </div>
+
+</div>
+
+</body>
+</html>
